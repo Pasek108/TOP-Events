@@ -1,0 +1,32 @@
+<header class="bg-slate-800 p-4 h-16 text-gray-50">
+  <div class="flex justify-between items-center gap-8 mx-auto h-full container">
+    <div class="font-bold text-2xl">
+      <%= link_to "EventoMundo", root_path %>
+    </div>
+
+    <% if user_signed_in? %>
+      <div data-controller="user-menu" data-action="click->user-menu#toggleMenu" class="relative h-full">
+        <div class="flex justify-center items-center gap-2 h-full cursor-pointer">
+          <i class="h-5.5 text-2xl fa-solid fa-circle-user"></i>
+          <%= current_user.username %>
+          <i data-user-menu-target="caret" class="text-sm fa-caret-down fa-solid"></i>
+        </div>
+
+        <ul data-user-menu-target="menu" style="display: none" class="top-full right-0 absolute bg-neutral-50 mt-2 border rounded-sm w-40 overflow-hidden text-black">
+          <li class="hover:bg-neutral-300">
+            <%= button_to user_profile_path(current_user.id), method: :get, class: "px-3 py-2 w-full h-full text-left cursor-pointer" do %>
+              <i class="fa-solid fa-user"></i> Profile
+            <% end %>
+          </li>
+          <li class="hover:bg-neutral-300">
+            <%= button_to destroy_user_session_path, method: :get, class: "px-3 py-2 w-full h-full text-left cursor-pointer" do %>
+              <i class="fa-right-from-bracket fa-solid"></i> Log Out
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    <% else %>
+      <%= link_to "Sign Up", new_user_registration_path %>
+    <% end %>
+  </div>
+</header>

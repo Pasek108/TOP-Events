@@ -1,37 +1,48 @@
 <%= form_with(model: event, class: "contents") do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+  <div class="flex flex-wrap md:flex-nowrap gap-4 w-full">
+    <div class="grow basis-1/2">
+      <div class="my-5">
+        <%= form.label :title %>
+        <%= form.text_field :title, class: ["block shadow-sm mt-2 px-3 py-2 border rounded-md w-full", {"border-gray-400 focus:outline-blue-600": event.errors[:title].none?, "border-red-700 border-2": event.errors[:title].any?}] %>
 
-      <ul class="list-disc ml-6">
-        <% event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul class="text-red-600">
+          <% event.errors.full_messages_for(:title).each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :date %>
+        <%= form.datetime_field :date, class: ["block shadow-sm mt-2 px-3 py-2 border rounded-md w-full", {"border-gray-400 focus:outline-blue-600": event.errors[:date].none?, "border-red-700 border-2": event.errors[:date].any?}] %>
+      
+        <ul class="text-red-600">
+          <% event.errors.full_messages_for(:date).each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="mt-5">
+        <%= form.label :description %>
+        <%= form.textarea :description, rows: 4, class: ["block shadow-sm mt-2 px-3 py-2 border rounded-md w-full h-60", {"border-gray-400 focus:outline-blue-600": event.errors[:description].none?, "border-red-700 border-2": event.errors[:description].any?}] %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="my-5">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": event.errors[:title].none?, "border-red-400 focus:outline-red-600": event.errors[:title].any?}] %>
+    <div data-controller="map-edit" class="flex flex-col grow basis-1/2">
+      <%= form.label :location, class: "mt-5 mb-2" %>
+      <%= form.text_field :location, data: { "map-edit-target": "location" }, class: ["hidden shadow-sm mt-2 px-3 py-2 border rounded-md w-full", {"border-gray-400 focus:outline-blue-600": event.errors[:location].none?, "border-red-700 border-2": event.errors[:location].any?}] %>
+      <div data-map-edit-target="map" id="map" class="z-0 relative border-[0.5px] border-neutral-500 rounded-md h-screen md:h-60 grow <%= event.errors[:location].any? ? 'outline-red-700 outline-2 !-outline-offset-1' : '' %>"></div>
+      
+      <ul class="text-red-600">
+          <% event.errors.full_messages_for(:location).each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
   </div>
 
-  <div class="my-5">
-    <%= form.label :description %>
-    <%= form.textarea :description, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": event.errors[:description].none?, "border-red-400 focus:outline-red-600": event.errors[:description].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :date %>
-    <%= form.datetime_field :date, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": event.errors[:date].none?, "border-red-400 focus:outline-red-600": event.errors[:date].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": event.errors[:location].none?, "border-red-400 focus:outline-red-600": event.errors[:location].any?}] %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <div class="inline-block mt-5">
+    <%= form.submit class: "inline-block bg-blue-600 hover:bg-blue-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-white cursor-pointer" %>
   </div>
 <% end %>

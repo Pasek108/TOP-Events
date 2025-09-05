@@ -1,0 +1,20 @@
+<% content_for :title, "#{@user.username} profile" %>
+
+<div class="px-4 py-12 w-full">
+  <div class="flex justify-center mx-auto h-fit min-h-full container max-auto">
+    <div class="w-full">
+      <h1 class="font-bold text-4xl"><%= @user.username %></h1>
+      
+      <p class="mt-12 mb-2 font-bold">To-do in the future:</p>
+      <ul class="ml-5">
+        <li class="list-disc">Profile editing</li>
+        <li class="list-disc">User data, friends</li>
+        <li class="list-disc">Events shared with current user</li>
+        <li class="list-disc">User created public events (visible for everyone)</li>
+        <li class="list-disc">User attended public events (visible for everyone)</li>
+        <li class="list-disc">User created private events (visible only for him)</li>
+        <li class="list-disc">User attended private events (visible for only him)</li>
+      </ul>
+    </div>
+  </div>
+</div>

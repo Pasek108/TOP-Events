@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
   root "events#index"
 
-  resources :events
+  get "homepage", to: "homepage#show", as: "homepage"
+
   devise_for :users
+  get "users/:id", to: "users#show", as: "user_profile"
+
+  resources :events do
+    member do
+      post "join"
+    end
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

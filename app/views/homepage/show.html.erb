@@ -1,0 +1,84 @@
+<div class="relative bg-radial from-10% from-black/25 to-black/0 w-full text-neutral-900">
+  <div class="flex justify-center items-center gap-4 mx-auto px-5 w-7xl max-w-full h-[30rem]">
+    <div class="text-shadow-black/50 text-shadow-md font-bold text-stroke text-white text-center">
+      <h1 class="mb-3 sm:mb-5 text-5xl sm:text-7xl">EventoMundo</h1>
+      <p class="font-extrabold sm:text-2xl">Create Moments. Join the World.</p>
+    </div>
+  </div>
+
+  <%= image_tag "homepage/party.jpeg", alt: "party background", class: "bottom-0 -z-10 absolute w-full min-h-full object-cover" %>
+</div>
+
+<div class="bg-stone-50 px-6 py-12 w-full text-neutral-900">
+  <div class="flex md:flex-row flex-col-reverse justify-center gap-14 mx-auto xl:max-w-7xl h-fit container">
+    <div class="relative flex justify-center items-center md:w-1/2 grow">
+      <%= image_tag "homepage/section1/egzekucja_gilotyna.avif", alt: "egzekucja gilotyna", class: "shadow-black/50 shadow-lg border-[0.1px] w-full max-h-full" %>
+    </div>
+
+    <article class="flex flex-col justify-center gap-4 md:w-1/2 md:text-left text-center grow">
+      <h3 class="font-bold text-2xl">Big events, big emotions</h3>
+      <p class="">
+        Feel the energy of the crowd, the sounds that move your soul, and an atmosphere that stays with you. On EventoMundo, you'll discover concerts, festivals, and local happenings that bring people together and create unforgettable experiences. Join the rhythm of vibrant events and be part of something truly special!
+      </p>
+    </article>
+  </div>
+</div>
+
+<div class="bg-stone-900 px-6 py-12 w-full text-neutral-50">
+  <div class="flex md:flex-row flex-col justify-center gap-14 mx-auto xl:max-w-7xl h-fit container">
+    <article class="flex flex-col justify-center gap-4 md:w-1/2 md:text-left text-center grow">
+      <h3 class="font-bold text-2xl">Meetings in an intimate setting</h3>
+      <p class="">
+        Join gatherings where the atmosphere, genuine conversations, and closeness matter. A small group, exceptional people, and unforgettable moments – here, every presence counts. Reserve your spot and feel the difference!
+      </p>
+    </article>
+
+    <div class="relative flex justify-end items-end py-12.5 md:w-1/2 grow">
+      <%= image_tag "homepage/section2/ostatnia_wieczerza.jpg", alt: "ostatnia wieczerza", class: "shadow-lg -mt-12 border-[0.1px] w-3/5 hadow-black/50" %>
+      <%= image_tag "homepage/section2/impreza_informatykow.jpg", alt: "impreza informatykow", class: "left-0 absolute shadow-black/50 shadow-lg -mb-12 border-[0.1px] w-3/5" %>
+    </div>
+  </div>
+</div>
+
+<div class="bg-stone-50 px-6 py-12 w-full text-neutral-900">
+  <div class="flex md:flex-row flex-col-reverse justify-center gap-14 mx-auto xl:max-w-7xl h-fit container">
+    <div class="z-0 relative flex justify-center items-end mt-4 px-8 md:w-1/2 grow">
+      <%= image_tag "homepage/section3/kebab_ugniatany_stopami.jpg", alt: "kebab ugniatany stopami", class: "shadow-black/50 shadow-lg border-[0.1px] w-[45%]" %>
+      <%= image_tag "homepage/section3/zlozenie_kolegi_w_ofierze.png", alt: "zlozenie kolegi w ofierze", class: "top-0 left-0 -z-10 absolute shadow-black/50 shadow-lg border-[0.1px] w-2/5 -rotate-15" %>
+      <%= image_tag "homepage/section3/magical.jpg", alt: "daniel magical", class: "top-5 -z-20 absolute shadow-black/50 shadow-lg border-[0.1px] w-2/3 -rotate-5 -scale-x-100" %>
+      <%= image_tag "homepage/section3/poduszka_ze_swini.jpg", alt: "poduszka ze swini", class: "bottom-0 left-4 -z-20 absolute shadow-black/50 shadow-lg border-[0.1px] w-1/3 rotate-3" %>
+      <%= image_tag "homepage/section3/gosc_w_wannie.png", alt: "gosc w wannie", class: "right-0 bottom-6 -z-10 absolute shadow-black/50 shadow-lg border-[0.1px] w-2/5 rotate-12" %>
+    </div>
+
+    <article class="flex flex-col justify-center gap-4 md:w-1/2 md:text-left text-center grow">
+      <h3 class="font-bold text-2xl">Unforgettable memories</h3>
+      <p class="">
+        Immerse yourself in the atmosphere of events that stay with you forever! Our events are not just great fun, but also unique emotions, new connections, and moments you'll look back on with a smile. Join us and discover what a truly magical experience feels like – we create memories that stay with you for a long time!
+      </p>
+    </article>
+  </div>
+</div>
+
+<div class="bg-stone-900 px-6 py-18 w-full text-neutral-50">
+  <div class="flex md:flex-row flex-col justify-center gap-14 mx-auto xl:max-w-7xl h-fit container">
+    <article class="flex flex-col justify-center gap-4 md:w-1/2 grow">
+      <h3 class="font-bold text-3xl">Ready to dive in?</h3>
+      <p class="">
+        If you are looking for unforgettable moments, new connections, and exciting event you are in right place. EventoMundo is your gateway to a world of real experiences — created by people like you.
+      </p>
+      <p class="">Start your journey today.</p>
+      <%= button_to "Sign up for free!", new_user_registration_path, method: :get, class: "hover:bg-neutral-50 px-y py-2 border-2 rounded-md w-full font-bold hover:text-stone-900 transition cursor-pointer" %>
+    </article>
+
+    <article class="flex flex-col justify-center gap-4 md:w-1/2 grow">
+      <h3 class="font-bold text-2xl">✨ Why join EventoMundo?</h3>
+      <ul class="">
+        <li class="mb-1 ml-5 list-disc">Create your own events in just a few clicks</li>
+        <li class="mb-1 ml-5 list-disc">Join events you love – from hangouts with friends to big concerts</li>
+        <li class="mb-1 ml-5 list-disc">Meet people who share your vibe</li>
+        <li class="mb-1 ml-5 list-disc">Explore by interest, location, or mood</li>
+        <li class="mb-1 ml-5 list-disc">Everything for free - no ads, full access</li>
+      </ul>
+    </article>
+  </div>
+</div>
