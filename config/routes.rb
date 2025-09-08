@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   get "users/:id", to: "users#show", as: "user_profile"
 
   resources :events do
-    member do
-      post "join"
-    end
+    post "join", on: :member
+    delete "leave", on: :member
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

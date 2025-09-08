@@ -1,0 +1,21 @@
+<div 
+  data-controller="map-location" 
+  data-map-location-editable-value="<%= editable %>" 
+  class="flex w-full h-full grow">
+  
+  <input 
+    data-map-location-target="location" 
+    name="event[location]"
+    type="text" value="<%= current_location %>" 
+    class="hidden">
+  
+  <div 
+    data-map-location-target="map" id="<%= map_id %>" 
+    class="
+    z-0 relative 
+    border-[0.5px] border-neutral-500 rounded-md 
+    w-full md:h-full h-[90vh] min-h-60 grow 
+    <%= has_errors ? 'outline-red-700 outline-2 !-outline-offset-1' : '' %>">
+  </div>
+
+</div>

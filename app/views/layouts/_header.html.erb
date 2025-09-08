@@ -5,7 +5,7 @@
     </div>
 
     <% if user_signed_in? %>
-      <div data-controller="user-menu" data-action="click->user-menu#toggleMenu" class="relative h-full">
+      <div data-controller="user-menu" data-action="click->user-menu#showMenu" class="relative h-full">
         <div class="flex justify-center items-center gap-2 h-full cursor-pointer">
           <i class="h-5.5 text-2xl fa-solid fa-circle-user"></i>
           <%= current_user.username %>

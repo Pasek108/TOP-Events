@@ -16,8 +16,10 @@
     </div>
   </header>
 
-  <div data-controller="map" class="w-full grow">
-    <input data-map-target="location" type="text" value="<%= event.location %>" class="hidden">
-    <div data-map-target="map" id="map-<%= event.id %>" class="z-0 relative border-[0.5px] border-neutral-500 rounded-md h-60 grow"></div>
-  </div>
+  <%= 
+    render "shared/map_location", 
+    map_id: "map-#{event.id}", 
+    current_location: event.location, 
+    has_errors: false, editable: false
+  %>
 </div>

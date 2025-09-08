@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy join ]
-  before_action :authenticate_user!, except: [ :index, :show ]
-  before_action :authorize_user, only: [ :edit, :destroy ]
+  before_action :set_event, only: %i[ show edit update destroy join leave ]
+  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :authorize_event_creator, only: %i[ edit destroy ]
 
   def index
     if user_signed_in?
@@ -49,10 +49,22 @@ class EventsController < ApplicationController
   end
 
   def join
-    if @event.attendees.include?(current_user)
-      @event.attendees.delete(current_user)
-    else
+    unless helpers.joined_event?(@event)
       @event.attendees << current_user
+      flash[:success] = "You have successfully joined the event."
+    else
+      flash[:notice] = "You have already joined the event."
+    end
+
+    redirect_to request.referrer
+  end
+
+  def leave
+    if helpers.joined_event?(@event)
+      @event.attendees.destroy(current_user)
+      flash[:success] = "You have successfully left the event."
+    else
+      flash[:notice] = "You have already left the event."
     end
 
     redirect_to request.referrer
@@ -68,7 +80,7 @@ class EventsController < ApplicationController
     params.expect(event: [ :title, :description, :date, :location ])
   end
 
-  def authorize_user
+  def authorize_event_creator
     unless current_user == @event.creator
       flash[:error] = "Something went wrong"
       redirect_to events_path

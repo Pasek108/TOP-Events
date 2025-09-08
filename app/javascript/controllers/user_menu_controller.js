@@ -4,17 +4,20 @@ export default class extends Controller {
   static targets = ["menu", "caret"]
   closeMenuOnClick = this.closeMenu.bind(this)
 
-  toggleMenu() {
+  showMenu() {
     if (this.menuTarget.style.display == '') return
 
     this.toggleCaretIcon()
     this.menuTarget.style.display = null
+
+    // delay adding the event to avoid triggering it on the current click
     setTimeout(() => window.addEventListener("click", this.closeMenuOnClick), 0)
   }
 
   closeMenu() {
     this.toggleCaretIcon()
     this.menuTarget.style.display = "none"
+
     window.removeEventListener("click", this.closeMenuOnClick)
   }
 

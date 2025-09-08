@@ -29,11 +29,16 @@
       </div>
     </div>
 
-    <div data-controller="map-edit" class="flex flex-col grow basis-1/2">
-      <%= form.label :location, class: "mt-5 mb-2" %>
-      <%= form.text_field :location, data: { "map-edit-target": "location" }, class: ["hidden shadow-sm mt-2 px-3 py-2 border rounded-md w-full", {"border-gray-400 focus:outline-blue-600": event.errors[:location].none?, "border-red-700 border-2": event.errors[:location].any?}] %>
-      <div data-map-edit-target="map" id="map" class="z-0 relative border-[0.5px] border-neutral-500 rounded-md h-screen md:h-60 grow <%= event.errors[:location].any? ? 'outline-red-700 outline-2 !-outline-offset-1' : '' %>"></div>
-      
+    <div class="flex flex-col grow basis-1/2">
+      <label class="mt-5 mb-2">Location</label>
+      <%= 
+        render "shared/map_location", 
+        map_id: "map-#{@event.id}", 
+        current_location: @event.location, 
+        has_errors: event.errors[:location].any?,
+        editable: true
+      %>
+
       <ul class="text-red-600">
           <% event.errors.full_messages_for(:location).each do |message| %>
             <li><%= message %></li>

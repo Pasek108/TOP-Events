@@ -1,22 +1,18 @@
 <% content_for :title, "Events" %>
 
-<div class="px-4 py-12 w-full">
-  <div class="flex justify-center mx-auto h-fit min-h-full container max-auto">
-    <div class="w-full">
-      <div class="flex justify-between items-center">
-        <h1 class="font-bold text-4xl">Events</h1>
-        <%= link_to "New event", new_event_path, class: "block bg-blue-600 hover:bg-blue-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md font-medium text-white" %>
-      </div>
-
-      <div id="events" class="gap-8 sm:gap-4 lg:gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 min-w-full">
-        <% if @events.any? %>
-          <% @events.each do |event| %>
-            <%= render "event_card", event: event %>
-          <% end %>
-        <% else %>
-          <p class="my-10 text-center">No events found.</p>
-        <% end %>
-      </div>
-    </div>
+<%= render layout: "shared/centered_container_wrapper" do %>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Events</h1>
+    <%= link_to "New event", new_event_path, class: "block bg-blue-600 hover:bg-blue-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md font-medium text-white" %>
   </div>
-</div>
+
+  <div id="events" class="gap-8 sm:gap-4 lg:gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 min-w-full">
+    <% if @events.any? %>
+      <% @events.each do |event| %>
+        <%= render "event_card", event: event %>
+      <% end %>
+    <% else %>
+      <p class="my-10 text-center">No events found.</p>
+    <% end %>
+  </div>
+<% end %>
