@@ -36,10 +36,12 @@
       <div class="flex flex-col grow basis-1/2">
         <strong class="block mb-1 font-medium">Location:</strong>
         <%= 
-              render "shared/map_location", 
-              map_id: "map-#{@event.id}", 
-              current_location: @event.location, 
-              has_errors: false, editable: false
+              render partial: "shared/map_location", 
+              locals: {
+                map_id: "map-#{@event.id}", 
+                current_location: @event.location, 
+                has_errors: false, editable: false
+              }
             %>
       </div>
     </div>
@@ -53,7 +55,7 @@
 
   <%= link_to "Back to events", events_path, class: "inline-block bg-gray-100 hover:bg-gray-50 mt-2 sm:mt-0 mr-1 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-center" %>
 
-  <% if current_user.id == @event.creator_id %>
+  <% if @event.organizers.include?(current_user) %>
     <%= link_to "Edit this event", edit_event_path(@event), class: "inline-block bg-blue-600 hover:bg-blue-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-white text-center" %>
     <%= button_to "Destroy this event", @event, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-1", class: "bg-red-600 hover:bg-red-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full font-medium text-white cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
   <% end %>

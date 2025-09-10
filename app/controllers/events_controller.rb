@@ -20,9 +20,9 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.creator_id = current_user.id
 
     if @event.save
+      UserEvent.create(user: current_user, event: @event, role: :organizer)
       redirect_to @event, notice: "Event was successfully created."
     else
       flash.now[:error] = "Something went wrong."
@@ -50,7 +50,7 @@ class EventsController < ApplicationController
 
   def join
     unless helpers.joined_event?(@event)
-      @event.attendees << current_user
+      UserEvent.create(user: current_user, event: @event, role: :attendee)
       flash[:success] = "You have successfully joined the event."
     else
       flash[:notice] = "You have already joined the event."
@@ -61,7 +61,7 @@ class EventsController < ApplicationController
 
   def leave
     if helpers.joined_event?(@event)
-      @event.attendees.destroy(current_user)
+      UserEvent.find_by(user: current_user, event: @event, role: :attendee)&.destroy
       flash[:success] = "You have successfully left the event."
     else
       flash[:notice] = "You have already left the event."
@@ -81,7 +81,7 @@ class EventsController < ApplicationController
   end
 
   def authorize_event_creator
-    unless current_user == @event.creator
+    unless @event.organizers.include?(current_user)
       flash[:error] = "Something went wrong"
       redirect_to events_path
     end

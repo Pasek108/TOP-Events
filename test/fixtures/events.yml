@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
+  title: Bania u cygana
+  description: Bania u cygana do rana
   date: 2025-09-02 14:39:04
-  location: MyString
+  location: 52, 19
 
 two:
-  title: MyString
-  description: MyText
-  date: 2025-09-02 14:39:04
-  location: MyString
+  title: Event title
+  description: Description
+  date: 2025-09-10 22:00:00
+  location: 69, 0
