@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import L from "leaflet"
+import "leaflet"
 
 export default class extends Controller {
   static targets = ["map", "location"]
