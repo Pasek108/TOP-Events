@@ -1,19 +1,13 @@
 class Event < ApplicationRecord
   has_many :user_events, dependent: :destroy
 
+  has_many :user_events_attendees, -> { attendees }, class_name: "UserEvent"
+  has_many :attendees, through: :user_events_attendees, source: :user
+
+  has_many :user_events_organizers, -> { organizers }, class_name: "UserEvent"
+  has_many :organizers, through: :user_events_organizers, source: :user
+
   validates :title, presence: true
   validates :date, presence: true
   validates :location, presence: true
-
-  def attendees
-    user_events.attendees.map(&:user)
-  end
-
-  def organizers
-    user_events.organizers.map(&:user)
-  end
-
-  def performers
-    user_events.performers.map(&:user)
-  end
 end

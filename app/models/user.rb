@@ -8,15 +8,9 @@ class User < ApplicationRecord
 
   has_many :user_events, dependent: :destroy
 
-  def attended_events
-    user_events.attendees.map(&:event)
-  end
+  has_many :user_events_attendee, -> { where(role: :attendee) }, class_name: "UserEvent"
+  has_many :attended_events, through: :user_events_attendee, source: :event
 
-  def organized_events
-    user_events.organizers.map(&:event)
-  end
-
-  def performed_events
-    user_events.performers.map(&:event)
-  end
+  has_many :user_events_organizer, -> { where(role: :organizer) }, class_name: "UserEvent"
+  has_many :organized_events, through: :user_events_organizer, source: :event
 end
