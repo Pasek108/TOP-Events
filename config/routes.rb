@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  root "events#index"
+
+  get "homepage", to: "homepage#show", as: "homepage"
+
+  devise_for :users
+  get "users/:id", to: "users#show", as: "user_profile"
+
+  resources :events do
+    post "join", on: :member
+    delete "leave", on: :member
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

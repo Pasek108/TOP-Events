@@ -1,0 +1,55 @@
+<%= form_with(model: event, class: "contents") do |form| %>
+  <div class="flex flex-wrap md:flex-nowrap gap-4 w-full">
+    <div class="grow basis-1/2">
+      <div class="my-5">
+        <%= form.label :title %>
+        <%= form.text_field :title, class: ["block shadow-sm mt-2 px-3 py-2 border rounded-md w-full", event.errors[:title].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"] %>
+
+        <ul class="text-red-600">
+          <% event.errors.full_messages_for(:title).each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :date %>
+        <%= form.datetime_field :date, class: ["block shadow-sm mt-2 px-3 py-2 border rounded-md w-full", event.errors[:date].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"] %>
+      
+        <ul class="text-red-600">
+          <% event.errors.full_messages_for(:date).each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="mt-5">
+        <%= form.label :description %>
+        <%= form.textarea :description, rows: 4, class: ["block shadow-sm mt-2 px-3 py-2 border rounded-md w-full h-60", event.errors[:description].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"] %>
+      </div>
+    </div>
+
+    <div class="flex flex-col grow basis-1/2">
+      <label class="mt-5 mb-2">Location</label>
+      <%= 
+        render partial: "shared/map_location", 
+        locals: {
+          map_id: "map-#{@event.id}", 
+          current_location: @event.location, 
+          has_errors: event.errors[:location].any?,
+          editable: true
+        }
+      %>
+
+      <ul class="text-red-600">
+          <% event.errors.full_messages_for(:location).each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
+  </div>
+
+  <div class="inline-block mt-5">
+    <%= form.submit class: "inline-block bg-blue-600 hover:bg-blue-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-white cursor-pointer" %>
+  </div>
+<% end %>

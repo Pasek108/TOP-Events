@@ -1,0 +1,13 @@
+<% content_for :title, "Editing event" %>
+
+<%= render layout: "shared/centered_container_wrapper" do %>
+  <h1 class="font-bold text-4xl">Editing event</h1>
+
+  <%= render "form", event: @event %>
+
+  <div class="inline-flex gap-2 ml-1">
+    <%= link_to "Show this event", @event, class: "inline-block bg-gray-100 hover:bg-gray-50 mt-2 sm:mt-0 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-center" %>
+    <%= link_to "Back to events", events_path, class: "inline-block bg-gray-100 hover:bg-gray-50 mt-2 sm:mt-0 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-center" %>
+    <%= button_to "Destroy", @event, method: :delete, class: "bg-red-600 hover:bg-red-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-white cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  </div>
+<% end %>

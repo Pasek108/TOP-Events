@@ -1,0 +1,28 @@
+<div class="flex flex-col gap-4 shadow-black/50 shadow-lg p-4 border rounded-md">
+  <header class="flex justify-between gap-4">
+    <div>
+      <strong class="block mb-1 text-lg"><%= event.title %></strong>
+      <p class="block mb-1 text-[0.925rem]"><i class="fa-solid fa-calendar"></i> <%= event.date.to_s[0..-8] %></p>
+      <p class="">
+        <%= event.description %>
+      </p>
+    </div>
+
+    <div class="flex flex-col space-y-1 w-20 sm:w-auto">
+      <%= link_to "Show", event, class: "inline-block bg-gray-100 hover:bg-gray-50 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-center" %>
+
+      <% if event.organizers.include?(current_user) %>
+        <%= link_to "Edit", edit_event_path(event), class: "inline-block bg-blue-600 hover:bg-blue-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-white text-center" %>
+      <% end %>
+    </div>
+  </header>
+
+  <%= 
+    render partial: "shared/map_location", 
+    locals: {
+      map_id: "map-#{event.id}", 
+      current_location: event.location, 
+      has_errors: false, editable: false
+    }
+  %>
+</div>

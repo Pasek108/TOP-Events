@@ -1,0 +1,62 @@
+<% content_for :title, "Showing event" %>
+
+<%= render layout: "shared/centered_container_wrapper" do %>
+  <h1 class="font-bold text-4xl">Showing event</h1>
+
+  <div id="<%= dom_id @event %>" class="my-5 w-full sm:w-auto">
+    <div class="flex flex-wrap md:flex-nowrap gap-4 w-full">
+      <div class="space-y-5 grow basis-1/2">
+        <div>
+          <strong class="block mb-1 font-medium">Title:</strong>
+          <%= @event.title %>
+        </div>
+        <div>
+          <strong class="block mb-1 font-medium">Description:</strong>
+          <%= @event.description %>
+        </div>
+        <div>
+          <strong class="block mb-1 font-medium">Date:</strong>
+          <%= @event.date %>
+        </div>
+        <div>
+          <strong class="block mb-1 font-medium">Attendees:</strong>
+
+          <% if @event.attendees.any? %>
+            <ul class="ml-5">
+              <% @event.attendees.each do |attendee| %>
+                <li class="list-disc"><%= attendee.username %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            None
+          <% end %>
+        </div>
+      </div>
+
+      <div class="flex flex-col grow basis-1/2">
+        <strong class="block mb-1 font-medium">Location:</strong>
+        <%= 
+              render partial: "shared/map_location", 
+              locals: {
+                map_id: "map-#{@event.id}", 
+                current_location: @event.location, 
+                has_errors: false, editable: false
+              }
+            %>
+      </div>
+    </div>
+  </div>
+
+  <% if joined_event?(@event) %>
+    <%= link_to "Leave event", leave_event_path, data: { turbo_method: :delete }, class: "inline-block bg-red-600 hover:bg-red-500 mt-2 sm:mt-0 mr-1 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-white text-center" %>
+  <% else %>
+    <%= link_to "Join event", join_event_path, data: { turbo_method: :post}, class: "inline-block bg-green-600 hover:bg-green-500 mt-2 sm:mt-0 mr-1 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-white text-center" %>
+  <% end %>
+
+  <%= link_to "Back to events", events_path, class: "inline-block bg-gray-100 hover:bg-gray-50 mt-2 sm:mt-0 mr-1 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-center" %>
+
+  <% if @event.organizers.include?(current_user) %>
+    <%= link_to "Edit this event", edit_event_path(@event), class: "inline-block bg-blue-600 hover:bg-blue-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full sm:w-auto font-medium text-white text-center" %>
+    <%= button_to "Destroy this event", @event, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-1", class: "bg-red-600 hover:bg-red-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md w-full font-medium text-white cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  <% end %>
+<% end %>

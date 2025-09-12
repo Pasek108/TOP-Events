@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Bania u cygana
+  description: Bania u cygana do rana
+  date: 2025-09-02 14:39:04
+  location: 52, 19
+
+two:
+  title: Event title
+  description: Description
+  date: 2025-09-10 22:00:00
+  location: 69, 0
