@@ -17,12 +17,18 @@
     </div>
   </header>
 
-  <%= 
-    render partial: "shared/map_location", 
-    locals: {
-      map_id: "map-#{event.id}", 
-      current_location: event.location, 
-      has_errors: false, editable: false
-    }
-  %>
+  <div class="max-h-60">
+    <%= 
+      render partial: "shared/map_location", 
+      locals: {
+        map_id: "map-#{event.id}", 
+        latitude: event.latitude, 
+        longitude: event.longitude,
+        location_name: event.location_name,
+        has_location_errors: false,
+        has_location_name_errors: false,
+        editable: false
+      }
+    %>
+  </div>
 </div>

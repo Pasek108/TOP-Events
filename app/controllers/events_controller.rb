@@ -77,7 +77,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.expect(event: [ :title, :description, :date, :location ])
+    params.expect(event: %i[ title description date ending_date latitude longitude location_name ])
   end
 
   def authorize_event_creator

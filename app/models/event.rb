@@ -9,5 +9,15 @@ class Event < ApplicationRecord
 
   validates :title, presence: true
   validates :date, presence: true
-  validates :location, presence: true
+  validates :ending_date, presence: true
+  validates :latitude, presence: true
+  validates :longitude, presence: true
+  validates :location_name, presence: true
+  validates :visibility, presence: true
+
+  enum :visibility, { public_event: 0, private_event: 1 }, default: :public_event
+
+  scope :past, -> { where("ending_date < ?", Time.current) }
+  scope :ongoing, -> { where("date <= ? AND ending_date >= ?", Time.current, Time.current) }
+  scope :upcoming, -> { where("date > ?", Time.current) }
 end

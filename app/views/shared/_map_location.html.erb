@@ -1,21 +1,45 @@
 <div 
   data-controller="map-location" 
   data-map-location-editable-value="<%= editable %>" 
-  class="flex w-full h-full grow">
-  
+  class="flex flex-col gap-2 w-full h-full grow">
+
   <input 
-    data-map-location-target="location" 
-    name="event[location]"
-    type="text" value="<%= current_location %>" 
+    data-map-location-target="latitude" 
+    name="event[latitude]"
+    type="text" value="<%= latitude %>" 
     class="hidden">
-  
+
+  <input 
+    data-map-location-target="longitude" 
+    name="event[longitude]"
+    type="text" value="<%= longitude %>" 
+    class="hidden">
+
+  <input 
+    data-map-location-target="locationName" 
+    data-action="input->map-location#updatePopupContent"
+    name="event[location_name]"
+    type="text" value="<%= location_name %>"
+    placeholder="Location name"
+    class="
+    <%= !editable ? "hidden" : "block" %>
+    w-full px-3 py-2 
+    border rounded-md shadow-sm 
+    <%= has_location_name_errors ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600" %>">
+
   <div 
     data-map-location-target="map" id="<%= map_id %>" 
     class="
     z-0 relative 
-    border-[0.5px] border-neutral-500 rounded-md 
-    w-full md:h-full h-[90vh] min-h-60 grow 
-    <%= has_errors ? 'outline-red-700 outline-2 !-outline-offset-1' : '' %>">
+     border-neutral-500 rounded-md 
+    w-full md:h-full h-[80vh] min-h-60 grow 
+    <%= has_location_errors ? 'border-red-700 border-2' : 'border-[0.5px]' %>">
   </div>
+
+  <% if has_location_name_errors || has_location_errors %>
+    <div class="-mt-2 text-red-600">
+      Location name and location must be provided
+    </div>
+  <% end %>
 
 </div>
