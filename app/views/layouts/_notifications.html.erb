@@ -1,6 +1,6 @@
 <div class="right-0 bottom-0 z-50 fixed flex flex-col-reverse p-4 w-[360px] h-fit">
   <% flash.each do |type, msg| %>
-    <div data-controller="notifications" class="<%= flash_class(type) %> relative flex text-white">
+    <div data-controller="notifications" class="<%= flash_class(type) %> relative flex text-white rounded-sm">
       <div class="flex flex-grow justify-center items-center bg-black/20 p-3 max-w-12 text-lg">
         <%= flash_icon(type) %>
       </div>
@@ -9,7 +9,7 @@
         <%= msg %>
       </div>
 
-      <div data-action="click->notifications#closeNotification" class="top-1 right-1 absolute text-xs cursor-pointer close-message">
+      <div data-action="click->notifications#closeNotification" class="top-1.5 right-1 absolute text-xs cursor-pointer close-message">
         <i class="fa-solid fa-xmark"></i>
       </div>
     </div>

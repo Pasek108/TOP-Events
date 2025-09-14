@@ -5,7 +5,8 @@ class EventsController < ApplicationController
 
   def index
     if user_signed_in?
-      @events = Event.all
+      # @events = Event.all
+      redirect_to upcoming_events_path, status: :see_other
     else
       redirect_to homepage_path, status: :see_other
     end
@@ -68,6 +69,18 @@ class EventsController < ApplicationController
     end
 
     redirect_to request.referrer
+  end
+
+  def past
+    @events = Event.past
+  end
+
+  def ongoing
+    @events = Event.ongoing
+  end
+
+  def upcoming
+    @events = Event.upcoming
   end
 
   private

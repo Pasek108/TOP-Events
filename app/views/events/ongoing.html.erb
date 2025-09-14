@@ -1,0 +1,20 @@
+<% content_for :title, "Events" %>
+
+<%= render layout: "shared/centered_container_wrapper" do %>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Events</h1>
+    <%= link_to "New event", new_event_path, class: "block bg-green-600 hover:bg-green-500 px-4 py-2 border-[0.5px] border-neutral-500 rounded-md font-medium text-white" %>
+  </div>
+
+  <%= render "events/group_links" %>
+
+  <div id="events" class="gap-8 sm:gap-4 lg:gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 min-w-full">
+    <% if @events.any? %>
+      <% @events.onging.each do |event| %>
+        <%= render "event_card", event: event %>
+      <% end %>
+    <% else %>
+      <p class="my-10 text-center">No events found.</p>
+    <% end %>
+  </div>
+<% end %>

@@ -3,7 +3,7 @@
     <div class="grow basis-1/2">
       <div class="my-2 mt-5">
         <%= form.label :title, class: "font-bold" %>
-        <%= form.text_field :title, class: "block shadow-sm mt-2 px-3 py-2 border rounded-md w-full #{event.errors[:title].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"}" %>
+        <%= form.text_field :title, class: "block shadow-sm mt-1 px-3 py-2 border rounded-md w-full #{event.errors[:title].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"}" %>
 
         <ul class="text-red-600">
           <% event.errors.full_messages_for(:title).each do |message| %>
@@ -15,7 +15,7 @@
       <div class="flex sm:flex-row flex-col gap-x-4">
         <div class="flex-grow my-2 sm:w-56">
           <%= form.label :date, class: "font-bold" %>
-          <%= form.datetime_field :date, class: "block shadow-sm mt-2 px-3 py-2 border rounded-md w-full #{event.errors[:date].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"}" %>
+          <%= form.datetime_field :date, class: "block shadow-sm mt-1 px-3 py-2 border rounded-md w-full #{event.errors[:date].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"}" %>
 
           <ul class="text-red-600">
             <% event.errors.full_messages_for(:date).each do |message| %>
@@ -26,7 +26,7 @@
 
         <div class="flex-grow my-2 sm:w-56">
           <%= form.label :ending_date, class: "font-bold" %>
-          <%= form.datetime_field :ending_date, class: "block shadow-sm mt-2 px-3 py-2 border rounded-md w-full #{event.errors[:ending_date].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"}" %>
+          <%= form.datetime_field :ending_date, class: "block shadow-sm mt-1 px-3 py-2 border rounded-md w-full #{event.errors[:ending_date].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"}" %>
 
           <ul class="text-red-600">
             <% event.errors.full_messages_for(:ending_date).each do |message| %>
@@ -38,12 +38,12 @@
 
       <div class="mt-5">
         <%= form.label :description, class: "font-bold" %>
-        <%= form.textarea :description, rows: 5, class: "block shadow-sm mt-2 px-3 py-2 border rounded-md w-full h-60 #{event.errors[:description].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"}" %>
+        <%= form.textarea :description, rows: 5, class: "block shadow-sm mt-1 px-3 py-2 border rounded-md w-full h-60 #{event.errors[:description].any? ? "border-red-700 border-2" : "border-gray-400 focus:outline-blue-600"}" %>
       </div>
     </div>
 
     <div class="flex flex-col grow basis-1/2">
-      <label class="mt-5 mb-2 font-bold">Location</label>
+      <label class="mt-5 mb-1 font-bold">Location</label>
       <%= 
         render partial: "shared/map_location", 
         locals: {

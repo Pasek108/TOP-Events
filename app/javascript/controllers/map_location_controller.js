@@ -41,7 +41,7 @@ export default class extends Controller {
 
     const map = L.map(mapElementId, mapDefaultOptions)
     map.on("popupopen", this.centerPopup.bind(this))
-    map.on("click", isMapEditable ? this.markNewLocation.bind(this) : null)
+    map.on("click", isMapEditable ? this.markNewLocation.bind(this) : () => {})
 
     const tileLayer = this.createTileLayer()
     tileLayer.addTo(map)
@@ -89,9 +89,7 @@ export default class extends Controller {
     popupAnchor.y -= popupHeight / 2
 
     // pan to new center
-    const isMapEditable = this.editableValue
-    const shouldAnimate = isMapEditable && this.connected
-    this.map.panTo(this.map.unproject(popupAnchor), { animate: shouldAnimate })
+    this.map.panTo(this.map.unproject(popupAnchor), { animate: this.connected })
   }
 
   updatePopupContent() {
@@ -105,7 +103,7 @@ export default class extends Controller {
 
   createMarkerPopup({ locationName, latitude, longitude }) {
     const popupContent = this.createMarkerPopupText({ locationName, latitude, longitude })
-    return L.popup({ maxWidth: 200 }).setContent(popupContent)
+    return L.popup({ maxWidth: 200, maxHeight: 150 }).setContent(popupContent)
   }
 
   createMarkerPopupText({ locationName, latitude, longitude }) {
