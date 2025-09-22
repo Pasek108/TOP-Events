@@ -5,7 +5,8 @@ class EventsController < ApplicationController
 
   def index
     if user_signed_in?
-      @events = Event.all
+      # @events = Event.all
+      redirect_to upcoming_events_path, status: :see_other
     else
       redirect_to homepage_path, status: :see_other
     end
@@ -70,6 +71,18 @@ class EventsController < ApplicationController
     redirect_to request.referrer
   end
 
+  def past
+    @events = Event.past
+  end
+
+  def ongoing
+    @events = Event.ongoing
+  end
+
+  def upcoming
+    @events = Event.upcoming
+  end
+
   private
 
   def set_event
@@ -77,7 +90,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.expect(event: [ :title, :description, :date, :location ])
+    params.expect(event: %i[ title description date ending_date latitude longitude location_name ])
   end
 
   def authorize_event_creator

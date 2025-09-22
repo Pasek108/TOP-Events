@@ -10,19 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_10_133853) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_13_170516) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "events", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
     t.datetime "date", null: false
-    t.string "location", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "visibility"
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.string "location_name", null: false
+    t.datetime "ending_date", null: false
   end
 
   create_table "user_events", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "event_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
     t.integer "role", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

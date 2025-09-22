@@ -1,3 +1,4 @@
+@import "../stylesheets/leaflet_custom.css";
 @import "tailwindcss";
 
 .text-stroke {

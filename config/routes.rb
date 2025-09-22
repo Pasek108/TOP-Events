@@ -7,8 +7,16 @@ Rails.application.routes.draw do
   get "users/:id", to: "users#show", as: "user_profile"
 
   resources :events do
-    post "join", on: :member
-    delete "leave", on: :member
+    member do
+      post "join"
+      delete "leave"
+    end
+
+    collection do
+      get :past
+      get :ongoing
+      get :upcoming
+    end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
